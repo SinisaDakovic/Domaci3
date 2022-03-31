@@ -1,0 +1,8 @@
+.formAdd {
+  display: flex;
+  justify-content: center;
+  padding-top: 3em;
+}
+.formItm {
+  margin-bottom: 0.5em;
+}

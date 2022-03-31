@@ -1,0 +1,8 @@
+.editCont {
+  display: flex;
+  justify-content: center;
+  padding-top: 5em;
+}
+.editItm {
+  margin-bottom: 0.5em;
+}

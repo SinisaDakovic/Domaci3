@@ -1,0 +1,37 @@
+.tableList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1.5em 0 5em;
+  flex-direction: column;
+}
+
+.tabela {
+  text-align: center;
+}
+.tabela td {
+  padding: 1em;
+  border-bottom: 1px solid black;
+}
+
+.deleteBtn {
+  border: none !important;
+  color: #a80f0f;
+  cursor: pointer;
+}
+
+.addBtn {
+  color: #fff;
+  padding: 0.5em 1.5em;
+  background-color: rgb(35, 93, 170);
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.tr {
+  cursor: pointer;
+}
+.tr:hover {
+  background-color: rgba(70, 70, 70, 0.473);
+}
