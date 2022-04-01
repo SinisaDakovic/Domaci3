@@ -8,6 +8,8 @@ function Add() {
 
     const navigate = useNavigate()
 
+    const [show, setShow] = useState(false)
+
     const {setBooks} = useCon()
     const {people, setPeople} = useCon()
     const {setFilms} = useCon()
@@ -21,16 +23,28 @@ function Add() {
    const match = useMatch('home/:list/add')
 
    const addingBooks = () => {
+     if(author === '' || name === '' || year === ''){
+       setShow(true)
+       return
+     }
        setBooks((prev) => [...prev,{author, title:name, year}])
        navigate(-1)
    }
 
    const addingFilms = () => {
+     if(name === '' || year === ''){
+       setShow(true)
+       return
+     }
        setFilms((prev) => [...prev,{Title:name, Released: year}])
        navigate(-1)
    }
 
    const addingPeople = () => {
+     if(name === '' || surname === '' || country === ''){
+       setShow(true)
+       return
+     }
        setPeople((prev) => [...prev,{id: people.length + 1,first_name:name, last_name: surname, country}])
        navigate(-1)
    }
@@ -39,27 +53,57 @@ function Add() {
     
         <div className="formAdd">
      <Form
+     name="normal_login"
       layout="vertical"
     >
     {match.params.list === "knjige" ? <>
-      <Form.Item label="Naziv" required className="formItm">
+      <Form.Item 
+      label="Naziv"  
+      className="formItm"
+      rules={[
+          {
+            required: true,
+            message: 'Please input Name',
+            
+          }]}
+      >
         <Input placeholder="The Stranger" onChange={(e) => setName(e.target.value)}/>
       </Form.Item>
+
       <Form.Item
       label="Autor"
       className="formItm"
+      rules={[
+          {
+            required: true,
+            message: 'Please input Author',
+          },
+        ]}
       >
-        <Input placeholder="Albert Camus" onChange={(e) => setAuthor(e.target.value)}/>
+        <Input 
+        placeholder="Albert Camus" 
+        onChange={(e) => setAuthor(e.target.value)}
+        />
       </Form.Item>
+
         <Form.Item
         className="formItm"
         label="Godina"
+        rules={[
+          {
+            required: true,
+            message: 'Please input Year',
+            
+          }]}
         >
         <Input placeholder="1942" type="number" onChange={(e) => setYear(e.target.value)}/>
       </Form.Item>
       <Form.Item >
-        <Button type="primary" style={{width:"100%", marginTop:"1em"}} onClick={() => addingBooks()}>Add</Button>
+        <Button type="primary" style={{width:"100%", marginTop:"1em", cursor:"pointer"}} htmlType="submit" onClick={() => addingBooks()}>Add</Button>
+      </Form.Item>
+      <Form.Item>
         <Button type="primary" style={{width:"100%", cursor:"pointer", marginTop:'1em'}} onClick={() => navigate(-1)}>Cancel</Button>
+        <p style={show ? {color:"red", opacity:1,textAlign:'center', fontSize:'12px'} : {opacity:0}}>*You need to fill all fields</p>
       </Form.Item>
             </> : ''}
 
@@ -77,8 +121,9 @@ function Add() {
         <Input placeholder="2003" type="number" onChange={(e) => setYear(e.target.value)}/>
       </Form.Item>
         <Form.Item >
-        <Button type="primary" style={{width:"100%", marginTop:"1em"}} onClick={() => addingFilms()}>Add</Button>
+        <Button type="primary" style={{width:"100%", marginTop:"1em", cursor:"pointer"}} htmlType="submit" onClick={() => addingFilms()}>Add</Button>
         <Button type="primary" style={{width:"100%", cursor:"pointer", marginTop:'1em'}} onClick={() => navigate(-1)}>Cancel</Button>
+        <p style={show ? {color:"red", opacity:1,textAlign:'center', fontSize:'12px'} : {opacity:0}}>*You need to fill all fields</p>
       </Form.Item>
         </> : ''}
 
@@ -99,8 +144,9 @@ function Add() {
         <Input placeholder="Montenegro" onChange={(e) => setCountry(e.target.value)}/>
       </Form.Item>
       <Form.Item >
-        <Button type="primary" style={{width:"100%", marginTop:"1em"}} onClick={() => addingPeople()}>Add</Button>
+        <Button type="primary" style={{width:"100%", marginTop:"1em", cursor:"pointer"}} htmlType="submit" onClick={() => addingPeople()}>Add</Button>
         <Button type="primary" style={{width:"100%", cursor:"pointer", marginTop:'1em'}} onClick={() => navigate(-1)}>Cancel</Button>
+        <p style={show ? {color:"red", opacity:1,textAlign:'center', fontSize:'12px'} : {opacity:0}}>*You need to fill all fields</p>
       </Form.Item>
         </> : ''}
 

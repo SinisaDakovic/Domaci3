@@ -6,3 +6,13 @@
 .formItm {
   margin-bottom: 0.5em;
 }
+
+.required {
+  color: red;
+  font-size: 12px;
+  opacity: 0;
+}
+
+.required.show {
+  opacity: 1;
+}
